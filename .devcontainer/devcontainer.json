@@ -1,0 +1,27 @@
+{
+    "name": "lisa",
+    "workspaceFolder": "/app",
+    "build": { 
+        "dockerfile": "Dockerfile",
+        "context": ".."
+    },
+    "settings": {
+        "terminal.integrated.defaultProfile.linux": "bash"
+    },
+    "mounts": [
+        { "source": "/home/akk/Github/LISA", "target": "/app", "type": "bind" },
+        { "source": "/media/data5/LISA/weight", "target": "/app/weight", "type": "bind"}
+        // { "source": "/home/tan/embeddedagi/eagichain", "target": "/app/eagichain", "type": "bind" },
+        // { "source": "/media/data4/hf_model", "target": "/media/data4/hf_model", "type": "bind" },
+        // { "source": "/home/tan/embeddedagi/eagichain/services/embeddings/chromadb/chromadb", "target": "/app/chromadb/chromadb", "type": "bind" }
+    ],
+    // "postStartCommand": "bash launch_dev.sh",
+    "initializeCommand": "docker network inspect devcontainernetwork > /dev/null || docker network create devcontainernetwork --attachable",
+
+    "runArgs": [
+        "--network=devcontainernetwork",
+        "--hostname=devcontainernetwork",
+        "--gpus",
+        "all"
+    ],
+}
